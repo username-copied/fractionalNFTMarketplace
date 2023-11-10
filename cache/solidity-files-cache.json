@@ -620,8 +620,8 @@
       "artifacts": []
     },
     "C:\\Users\\wayka\\Desktop\\Cryptocyrrency and Blockchain\\Mini Project Code\\base\\contracts\\FractionalNFTMarketplace.sol": {
-      "lastModificationDate": 1699564689485,
-      "contentHash": "3c5249e7955bbdffeee854d4ca72fdcc",
+      "lastModificationDate": 1699588156397,
+      "contentHash": "1d27d11a54a062018a35ccdf4ed1cabf",
       "sourceName": "contracts/FractionalNFTMarketplace.sol",
       "solcConfig": {
         "version": "0.8.4",

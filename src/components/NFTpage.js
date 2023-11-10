@@ -25,18 +25,20 @@ export default function NFTPage(props) {
     );
     //create an NFT Token
     const tokenURI = await contract.tokenURI(tokenId);
-    const listedToken = await contract.getListedTokenForId(tokenId);
+    const listedToken = await contract.getTokenData(tokenId);
     let meta = await axios.get(tokenURI);
     meta = meta.data;
 
     let item = {
-      price: meta.price,
+      pricePerShare: listedToken.pricePerShare,
       tokenId: tokenId,
       seller: listedToken.seller,
       owner: listedToken.owner,
       image: meta.image,
       name: meta.name,
       description: meta.description,
+        totalShares: listedToken.totalShares,
+        availableShares: listedToken.availableShares,
     };
 
     updateData(item);
@@ -58,12 +60,12 @@ export default function NFTPage(props) {
         MarketplaceJSON.abi,
         signer
       );
-      const salePrice = ethers.utils.parseUnits(data.price, "ether");
+      const salePrice = ethers.utils.parseUnits(data.pricePerShare, "ether");
       updateMessage("Buying the NFT... Please Wait (Upto 5 mins)");
       //run the executeSale function
-      let transaction = await contract.executeSale(tokenId, {
+      let transaction = await contract.executeFractionalPurchase(tokenId, {
         value: salePrice,
-      });
+      },1);
       await transaction.wait();
 
       alert("You successfully bought the NFT!");
@@ -86,8 +88,10 @@ export default function NFTPage(props) {
           <div>Name: {data.name}</div>
           <div>Description: {data.description}</div>
           <div>
-            Price: <span className="">{data.price + " ETH"}</span>
+            Price Per Share: <span className="">{data.pricePerShare + " ETH"}</span>
           </div>
+          <div>Total Numver of Shares: {data.totalShares}</div>
+          <div>Available Shares: {data.availableShares}</div>
           <div>
             Owner: <span className="text-sm">{data.owner}</span>
           </div>
