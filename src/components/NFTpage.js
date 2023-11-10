@@ -27,9 +27,12 @@ export default function NFTPage(props) {
     const tokenURI = await contract.tokenURI(tokenId);
     console.log(tokenURI);
     const listedToken = await contract.getTokenData(tokenId);
+    console.log(listedToken);
     let meta = await axios.get(tokenURI);
+
     console.log(meta);
     console.log(meta.data);
+    console.log(typeof(meta.data));
     meta = meta.data;
 
     let item = {
@@ -37,11 +40,11 @@ export default function NFTPage(props) {
       tokenId: tokenId,
       seller: listedToken.seller,
       owner: listedToken.owner,
-      image: meta.image,
+      image: listedToken.URI,
       name: meta.name,
       description: meta.description,
-        totalShares: listedToken.totalShares,
-        availableShares: listedToken.availableShares,
+      totalShares: listedToken.totalShares,
+      availableShares: listedToken.availableShares,
     };
 
     console.log(item.tokenId);
@@ -96,18 +99,18 @@ export default function NFTPage(props) {
       <div className="flex flex-col md:flex-row justify-center items-center justify-items-center ml-20 mt-20">
         <img src={data.image} alt="" className="w-2/5" />
         <div className="text-xl ml-20 md:mx-auto space-y-8 text-[#9d34b6] shadow-2xl rounded-lg border-2 p-5">
-          <div>Name: {data.name}</div>
-          <div>Description: {data.description}</div>
+          <div>Name: Board Ape Yatch{data.name}</div>
+          <div>Description: Board Ape Yatch #1{data.description}</div>
           <div>
-            Price Per Share: <span className="">{data.pricePerShare?._hex + " ETH"}</span>
+            Price Per Share: <span className="">{parseInt(data.pricePerShare?._hex)/Math.pow(10,18) + " ETH"}</span>
           </div>
-          <div>Total Numver of Shares: {data.totalShares?._hex}</div>
-          <div>Available Shares: {data.availableShares?._hex}</div>
+          <div>Total Numver of Shares: {parseInt(data.totalShares?._hex)/Math.pow(10,18)}</div>
+          <div>Available Shares: {parseInt(data.availableShares?._hex)/Math.pow(10,18)}</div>
           <div>
-            Owner: <span className="text-sm">{data.owner}</span>
+            Owner: <span className="text-sm">0xa7d116C06FD1b56454B7D5e73a43E701B7E921d1{data.owner}</span>
           </div>
           <div>
-            Seller: <span className="text-sm">{data.seller}</span>
+            Seller: <span className="text-sm">0xa7d116C06FD1b56454B7D5e73a43E701B7E921d1{data.seller}</span>
           </div>
           <div>
             {/* {currAddress == data.owner || currAddress == data.seller ? (
