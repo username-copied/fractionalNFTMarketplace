@@ -25,8 +25,11 @@ export default function NFTPage(props) {
     );
     //create an NFT Token
     const tokenURI = await contract.tokenURI(tokenId);
+    console.log(tokenURI);
     const listedToken = await contract.getTokenData(tokenId);
     let meta = await axios.get(tokenURI);
+    console.log(meta);
+    console.log(meta.data);
     meta = meta.data;
 
     let item = {
@@ -34,16 +37,21 @@ export default function NFTPage(props) {
       tokenId: tokenId,
       seller: listedToken.seller,
       owner: listedToken.owner,
-      image: meta.image,
-      name: meta.name,
-      description: meta.description,
+      // image: meta.image,
+      // name: meta.name,
+      // description: meta.description,
         totalShares: listedToken.totalShares,
         availableShares: listedToken.availableShares,
     };
 
+    console.log(item.tokenId);
     updateData(item);
+    console.log(typeof(item));
+    item = JSON.stringify(item);
+    item = JSON.parse(item);
+    console.log(item);
     updateDataFetched(true);
-
+    console.log("121212");
     updateCurrAddress(addr);
   }
 
@@ -77,7 +85,10 @@ export default function NFTPage(props) {
 
   const location = useLocation();
   const path = location.pathname.split("/")[2];
-  getNFTData(path);
+  if (path) {
+    getNFTData(path);
+  }
+  
 
   return (
     <div style={{ "min-height": "100vh" }}>
@@ -88,10 +99,10 @@ export default function NFTPage(props) {
           <div>Name: {data.name}</div>
           <div>Description: {data.description}</div>
           <div>
-            Price Per Share: <span className="">{data.pricePerShare + " ETH"}</span>
+            Price Per Share: <span className="">{data.pricePerShare?._hex + " ETH"}</span>
           </div>
-          <div>Total Numver of Shares: {data.totalShares}</div>
-          <div>Available Shares: {data.availableShares}</div>
+          <div>Total Numver of Shares: {data.totalShares?._hex}</div>
+          <div>Available Shares: {data.availableShares?._hex}</div>
           <div>
             Owner: <span className="text-sm">{data.owner}</span>
           </div>
