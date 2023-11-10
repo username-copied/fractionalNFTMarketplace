@@ -37,9 +37,9 @@ export default function NFTPage(props) {
       tokenId: tokenId,
       seller: listedToken.seller,
       owner: listedToken.owner,
-      // image: meta.image,
-      // name: meta.name,
-      // description: meta.description,
+      image: meta.image,
+      name: meta.name,
+      description: meta.description,
         totalShares: listedToken.totalShares,
         availableShares: listedToken.availableShares,
     };
@@ -110,7 +110,7 @@ export default function NFTPage(props) {
             Seller: <span className="text-sm">{data.seller}</span>
           </div>
           <div>
-            {currAddress == data.owner || currAddress == data.seller ? (
+            {/* {currAddress == data.owner || currAddress == data.seller ? (
               <div className="text-emerald-700">
                 You are the owner of this NFT
               </div>
@@ -123,7 +123,7 @@ export default function NFTPage(props) {
               </button>
             )}
 
-            <div className="text-green text-center mt-3">{message}</div>
+            <div className="text-green text-center mt-3">{message}</div> */}
           </div>
         </div>
       </div>
