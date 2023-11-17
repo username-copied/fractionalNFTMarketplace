@@ -1,6 +1,6 @@
-# Basic NFT Marketplace end to end
+# This is fractional NFT marketplace 
 
-This code is for the Tutorial [Build your own NFT Marketplace from Scratch](https://docs.alchemy.com/alchemy/) built by [alchemy.com](https://alchemy.com)
+<a>https://fractionalnftmarketplace.netlify.app</a>
 
 To set up the repository and run the marketplace locally, run the below
 ```bash
